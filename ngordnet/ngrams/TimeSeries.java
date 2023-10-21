@@ -58,8 +58,22 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      * should store the value from the TimeSeries that contains that year.
      */
     public TimeSeries plus(TimeSeries ts) {
-        // TODO: Fill in this method.
-        return null;
+        TimeSeries newTimeSeries = new TimeSeries();
+        // How to refer to the existing time series -> directly refer to `this`
+        for (Integer i : this.keySet()) {
+            if (!ts.containsKey(i)) {
+                // How to get the value of a corresponding key? -> with get
+                newTimeSeries.put(i, get(i));
+            } else {
+                newTimeSeries.put(i, get(i) + ts.get(i));
+            }
+            for (Integer j : ts.keySet()) {
+                if (!this.containsKey(j)) {
+                    newTimeSeries.put(j, ts.get(j));
+                }
+            }
+        }
+        return newTimeSeries;
     }
 
     /**
